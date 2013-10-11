@@ -33,4 +33,18 @@ MACRO ( SETUP_BENCHMARK COMPONENT_NAME )
 	)
 ENDMACRO ( SETUP_BENCHMARK )
 
+# Test
+MACRO ( SETUP_TEST COMPONENT_NAME )
+	include_directories(
+		${PROJECT_SOURCE_DIR}/include
+	)
+
+	SET ( TARGET_NAME Test_${COMPONENT_NAME} )
+
+	add_executable( ${TARGET_NAME}
+		test_${COMPONENT_NAME}.cpp
+	)
+ENDMACRO ( SETUP_TEST )
+
 ADD_SUBDIRECTORY ( "benchmark" )
+ADD_SUBDIRECTORY ( "test" )
