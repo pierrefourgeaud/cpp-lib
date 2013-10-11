@@ -46,7 +46,7 @@ public:
 	{
 		if ( m_File.is_open() )
 		{
-			m_File << iLog << std::endl;
+			m_File << iLog;
 			m_File.flush();
 		}
 	}
