@@ -12,16 +12,16 @@
 #include <algorithm>
 
 #define LOG(level)                              \
-	if ( level > Logger::ReportingLevel() ) ;   \
-	else Logger().Get(level)
+	if ( level > CppLib::Logger::ReportingLevel() ) ;   \
+	else CppLib::Logger().Get(level)
 
-#define LOGC  LOG(logCRITICAL)
-#define LOGE  LOG(logERROR)
-#define LOGW  LOG(logWARNING)
-#define LOGI  LOG(logINFO)
-#define LOGD  LOG(logDEBUG)
-#define LOGD1 LOG(logDEBUG1)
-#define LOGD2 LOG(logDEBUG2)
+#define LOGC  LOG(CppLib::logCRITICAL)
+#define LOGE  LOG(CppLib::logERROR)
+#define LOGW  LOG(CppLib::logWARNING)
+#define LOGI  LOG(CppLib::logINFO)
+#define LOGD  LOG(CppLib::logDEBUG)
+#define LOGD1 LOG(CppLib::logDEBUG1)
+#define LOGD2 LOG(CppLib::logDEBUG2)
 
 namespace CppLib
 {
