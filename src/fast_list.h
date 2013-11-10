@@ -1,3 +1,5 @@
+#ifndef CPPLIB_SRC_FAST_LIST_H
+# define CPPLIB_SRC_FAST_LIST_H
 
 #define NULL 0
 
@@ -7,13 +9,13 @@ class FastList
 {
 	struct data
 	{
-		data( T iData ):
-			m_Data( iData ),
-			m_pNext( NULL )
+		data( T iData )
+			: m_Data( iData )
+			, m_pNext( NULL )
 		{}
 
-		T 				m_Data;
-		struct data*	m_pNext;
+		T            m_Data;
+		struct data* m_pNext;
 	};
 
 public:
@@ -22,115 +24,121 @@ public:
 	public:
 		iterator() {}
 
-		iterator( data* iData ):
-			m_pData( iData )
-		{
-		}
+		iterator( data* iData )
+			: m_pData( iData )
+		{}
 
 		iterator& operator=( const data* iData )
 		{
-			this->m_pData = iData;
+			m_pData = iData;
 		}
 
 		void Next()
 		{
-			this->m_pData = this->m_pData->m_pNext;
+			m_pData = m_pData->m_pNext;
 		}
 
 		T Data()
 		{
-			return this->m_pData->m_Data;
+			return m_pData->m_Data;
 		}
 
 		bool End()
 		{
-			return NULL == this->m_pData->m_pNext;
+			return NULL == m_pData->m_pNext;
 		}
 
 	private:
-		data*	m_pData;
+		data* m_pData;
 	};
 
 public:
-	FastList():
-		m_pFirst( NULL ),
-		m_pLast( NULL ),
-		m_Size( 0 )
-	{
-	}
+	FastList()
+		: m_pFirst( NULL )
+		, m_pLast( NULL )
+		, m_Size( 0 )
+	{}
 
 	~FastList()
 	{
-		while ( this->m_pFirst )
+		while ( m_pFirst )
 		{
-			data* save = this->m_pFirst->m_pNext;
-			delete this->m_pFirst;
-			this->m_pFirst = save;
+			data* save = m_pFirst->m_pNext;
+			delete m_pFirst;
+			m_pFirst = save;
 		}
 	}
 
-	unsigned int 	Size()
+	unsigned int Size()
 	{
-		return this->m_Size;
+		return m_Size;
 	}
 
-	bool			Empty()
+	bool Empty()
 	{
-		return NULL == this->m_pFirst;
+		return NULL == m_pFirst;
 	}
 
 	/* Perform a push back */
-	void			Push( T iData )
+	void Push( T iData )
 	{
 		data* newElem = new data( iData );
-		if ( NULL != this->m_pLast )
-			this->m_pLast->m_pNext = newElem;
 
-		this->m_pLast = newElem;
+		if ( NULL != m_pLast )
+			m_pLast->m_pNext = newElem;
 
-		if ( NULL == this->m_pFirst )
-			this->m_pFirst = newElem;
+		m_pLast = newElem;
 
-		this->m_Size++;
+		if ( NULL == m_pFirst )
+			m_pFirst = newElem;
+
+		m_Size++;
 	}
 
 	/* Perform a pop front */
-	T 				Pop()
+	T Pop()
 	{
 		// TODO There is an issue here due to the copy of the element
 		//      I think that the element is destroyed at the end of the scope...
-		if ( NULL == this->m_pFirst )
+		if ( NULL == m_pFirst )
 			throw "";
-		T ret = this->m_pFirst->m_Data;
-		data* save = this->m_pFirst;
-		this->m_pFirst = this->m_pFirst->m_pNext;
+
+		T ret = m_pFirst->m_Data;
+		data* save = m_pFirst;
+		m_pFirst = m_pFirst->m_pNext;
 		delete save;
-		this->m_Size--;
+
+		m_Size--;
+
 		return ret;
 	}
 
-	T 				Front() const
+	T Front() const
 	{
-		if ( NULL == this->m_pFirst )
+		if ( NULL == m_pFirst )
 			throw "";
-		return this->m_pFirst->m_Data;
+
+		return m_pFirst->m_Data;
 	}
 
-	T 				Back() const
+	T Back() const
 	{
-		if ( NULL == this->m_pLast )
+		if ( NULL == m_pLast )
 			throw "";
-		return this->m_pLast->m_Data;
+
+		return m_pLast->m_Data;
 	}
 
-	data*			Begin() const
+	data* Begin() const
 	{
-		return this->m_pFirst;
+		return m_pFirst;
 	}
 
 private:
-	data*		m_pFirst;
-	data*		m_pLast;
+	data*        m_pFirst;
+	data*        m_pLast;
 
 	unsigned int m_Size;
 };
+
+#endif // !CPPLIB_SRC_FAST_LIST_H
