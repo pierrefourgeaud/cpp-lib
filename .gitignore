@@ -1,5 +1,7 @@
 .DS_Store
 *~
 BUILD/
+BUILD-*/
 bin/
 VC2012/
+VC2013/

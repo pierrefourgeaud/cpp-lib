@@ -3,6 +3,7 @@
 
 #include "iloglistener.hpp"
 
+#include <iostream>
 #include <fstream>
 #include <string>
 
@@ -22,12 +23,16 @@ public:
 		, m_IsCreated( false )
 	{
 		if ( m_FileName == "" )
+		{
 			m_FileName = DEFAULT_FILENAME;
+		}
 
 		// Just check if there is a slash at the end of the path
 		// Because it has to be there to create a valid path
 		if ( m_Path != "" && m_Path[m_Path.length() - 1] == '/' )
+		{
 			m_Path += "/";
+		}
 
 		_OpenFile();
 	}
@@ -37,7 +42,9 @@ public:
 	virtual ~FileLogger()
 	{
 		if ( m_File.is_open() )
+		{
 			m_File.close();
+		}
 	}
 
 	////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +72,9 @@ public:
 		// Begin by checking if there is a file already opened
 		// If yes, close it
 		if ( m_File.is_open() )
+		{
 			m_File.close();
+		}
 
 		m_FileName = iFileName;
 
@@ -78,19 +87,19 @@ private:
 	std::string m_Path;
 	bool        m_IsCreated;
 
-	std::fstream m_File;
+	std::ofstream m_File;
 
 	////////////////////////////////////////////////////////////////////////////////
 	//
 	void _OpenFile()
 	{
-		const char* filename = (m_Path + m_FileName).c_str();
-		m_File.open( filename,
-			std::fstream::ios_base::out | std::fstream::ios_base::trunc );
+		m_File.open( m_Path + m_FileName );
 
 		// Is the file opened correctly ?
 		if ( m_File.is_open() )
+		{
 			m_IsCreated = true;
+		}
 	}
 };
 

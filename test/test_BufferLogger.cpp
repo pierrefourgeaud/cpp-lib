@@ -5,8 +5,8 @@ using namespace CppLib;
 
 void test1()
 {
-	ILogListener* logL = new FileLogger();
-	Logger::AddListener( logL );
+	ILogListener* bufferLogger = new BufferLogger();
+	Logger::AddListener(bufferLogger);
 
 	Logger::ReportingLevel() = logDEBUG;
 

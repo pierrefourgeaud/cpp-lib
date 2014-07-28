@@ -2,6 +2,7 @@
 # define CPPLIB_INCLUDE_LOGGER_LOGGER_HPP
 
 #include "filelogger.hpp"
+#include "bufferlogger.hpp"
 
 // Logging code based on Petru Marginean's design
 // http://www.drdobbs.com/cpp/201804215?pgno=1
@@ -85,7 +86,9 @@ public:
 		// Return false if the listener is already in the vector. This is not expected
 		// but there is nothing really wrong either.
 		if ( tmp != Listeners().end() )
+		{
 			return false;
+		}
 
 		Listeners().push_back( iListener );
 		return true;
