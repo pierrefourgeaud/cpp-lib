@@ -13,7 +13,7 @@ class BufferLogger : public ILogListener
 public:
 	////////////////////////////////////////////////////////////////////////////////
 	//
-	BufferLogger::BufferLogger() {}
+	BufferLogger() {}
 
 	////////////////////////////////////////////////////////////////////////////////
 	//
@@ -49,7 +49,7 @@ public:
 	}
 
 private:
-		std::ostringstream m_Buffer;
+	std::ostringstream m_Buffer;
 };
 
 }
